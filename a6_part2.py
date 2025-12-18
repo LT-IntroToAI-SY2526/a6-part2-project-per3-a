@@ -85,7 +85,7 @@ def visualize_features(data):
     plt.show()
 
 def prepare_features(data):
-    # TODO: Create a list of feature column names
+    # Creates a list of feature column names
     #       ['Age', 'Duration', 'HeartRate']
     feature_columns = ['Age', 'Duration', 'HeartRate']
     X = data[feature_columns]
@@ -108,16 +108,15 @@ def split_data(X,y):
     return X_train, X_test, y_train, y_test
 
 def train_model(X_train, y_train, feature_names):
-    # TODO: Create a LinearRegression model
+    # Creates a LinearRegression model
     model = LinearRegression()
-    # TODO: Train the model using fit()
+    # Trains the model using fit()
     model.fit(X_train, y_train)
-    # TODO: Print the intercept
+    # Prints the intercept
     print(f"\n=== Model Training Complete ===")
     print(f"Intercept: ${model.intercept_:.2f}")
     print(f"\nCoefficients:")
-    # TODO: Print each coefficient with its feature name
-    #       Hint: use zip(feature_names, model.coef_)
+    # Prints each coefficient with its feature name
     for name, coef in zip(feature_names, model.coef_):
         print(f"  {name}: {coef:.2f}")
     
@@ -129,9 +128,9 @@ def train_model(X_train, y_train, feature_names):
         else:
             equation += f" + ({coef:.2f}) × {name}"
     equation += f" + {model.intercept_:.2f}"
-    # TODO: Print the full equation in readable format
+    # Prints the full equation in readable format
     print(equation)
-    # TODO: Return the trained model
+    # Returns the trained model
     return model
 
 def evaluate_model(model, X_test, y_test, feature_names):
@@ -161,11 +160,6 @@ def compare_predictions(y_test, predicyions, num_examples=5):
     print(f"\n=== Prediction Examples ===")
     print(f"{'Actual Calories Burned':<15} {'Predicted Calories Burned':<18} {'Error':<12} {'% Error'}")
     print("-" * 60)
-    # TODO: For the first num_examples:
-    #       - Get actual and predicted calories burned
-    #       - Calculate error (actual - predicted)
-    #       - Calculate percentage error
-    #       - Print in a nice formatted table
     for i in range(min(num_examples, len(y_test))):
         actual = y_test.iloc[i]
         predicted = predictions[i]
@@ -192,31 +186,22 @@ if __name__ == "__main__":
     print("=" * 70)
     
     # Step 1: Load and explore
-    # TODO: Call load_and_explore_data() with 'house_prices.csv'
-    data = load_and_explore_data('house_prices.csv')
+    data = load_and_explore_data('calories.csv')
     # Step 2: Visualize features
-    # TODO: Call visualize_features() with the data
     visualize_features(data)
     # Step 3: Prepare features
-    # TODO: Call prepare_features() and store X and y
     X, y = prepare_features(data)
     # Step 4: Split data
-    # TODO: Call split_data() and store X_train, X_test, y_train, y_test
     X_train, X_test, y_train, y_test = split_data(x, y)
     # Step 5: Train model
-    # TODO: Call train_model() with training data and feature names (X.columns)
     model = train_model(X_train, y_train, X.columns)
     # Step 6: Evaluate model
-    # TODO: Call evaluate_model() with model, test data, and feature names
     predictions = evaluate_model(model, X_test, y_test, X.columns)
     # Step 7: Compare predictions
-    # TODO: Call compare_predictions() showing first 10 examples
     compare_predictions(y_test, predictions)
     # Step 8: Make a new prediction
-    # TODO: Call make_prediction() for a house of your choice
     make_predictions(model, 45, 3, 0)
 
     print("\n" + "=" * 70)
     print("✓ Assignment complete! Check your saved plots.")
-    print("Don't forget to complete a6_part2_writeup.md!")
     print("=" * 70)
