@@ -234,7 +234,7 @@ def make_prediction(model):
     # Example: If predicting house price with [sqft, bedrooms, bathrooms]
     # sample = pd.DataFrame([[2000, 3, 2]], columns=feature_names)
     
-    input_df = pd.DataFrame([[age, duration, heartrate]],
+    input_df = pd.DataFrame([[30, 20, 95]],
                             columns=['Age', 'Duration', 'HeartRate'])
 
     prediction = model.predict(input_df)[0]
